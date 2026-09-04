@@ -30,3 +30,7 @@ node_modules/
 # Variáveis de ambiente
 .env
 .env.local
+
+.vercel
+preview/
+mobile-audit/
