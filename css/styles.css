@@ -728,7 +728,18 @@ p { margin: 0; }
     /* padding-top grande: conteúdo começa abaixo do header flutuante */
     padding: 100px var(--gutter) clamp(20px, 6vw, 32px);
     min-height: 100%;
-    align-items: end;
+    align-items: center; /* centralizado verticalmente */
+  }
+  /* Headline MAIOR no mobile — mais impacto */
+  .hero__title {
+    font-size: clamp(38px, 10.5vw, 52px);
+    line-height: 1.06;
+  }
+  /* Subtítulo um pouco maior e com mais espaço */
+  .hero__sub {
+    font-size: 15px;
+    line-height: 1.65;
+    margin-bottom: 18px;
   }
   .hero__caption {
     bottom: 12px;
