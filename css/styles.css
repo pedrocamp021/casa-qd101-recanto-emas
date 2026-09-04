@@ -158,8 +158,12 @@ p { margin: 0; }
 
 /* ============== HEADER (liquid glass) ============== */
 .header {
-  position: sticky;
+  /* fixed: header FLUTUA por cima da hero, não ocupa espaço no fluxo.
+     Assim a foto começa no y=0 e o blur do glass mostra a foto atrás. */
+  position: fixed;
   top: 12px;
+  left: 0;
+  right: 0;
   z-index: 50;
   /* Padding lateral pequeno pra não cortar conteúdo em mobile */
   padding: 0 12px;
@@ -414,9 +418,7 @@ p { margin: 0; }
   border-bottom: 1px solid rgba(217, 188, 115, 0.2);
   overflow: hidden;
   isolation: isolate;
-  /* 100vh TOTAL - sem padding, sem margin.
-     O background (hero__bg) cobre tudo, inclusive atrás do header.
-     O conteúdo (hero__inner) tem padding-top pra começar abaixo do header. */
+  /* Desktop: preenche 100vh completo, header fica por cima */
   min-height: 100svh;
   min-height: 100vh;
 }
@@ -707,7 +709,10 @@ p { margin: 0; }
 /* Mobile: foto centralizada, gradiente mais forte pra ler o texto */
 @media (max-width: 900px) {
   .hero {
-    /* Sem padding-top no mobile - o hero__inner já tem padding-top */
+    /* Header agora é fixed (flutua por cima) — hero ocupa 100vh inteiro,
+       sem desconto. O padding-top do hero__inner protege o conteúdo. */
+    min-height: 100svh;
+    min-height: 100vh;
   }
   .hero__bg {
     background-position: 65% center; /* ajuste fino do crop mobile */
@@ -720,9 +725,9 @@ p { margin: 0; }
     );
   }
   .hero__inner {
-    padding: clamp(64px, 14vw, 100px) var(--gutter) clamp(48px, 10vw, 80px);
-    /* Em mobile, mantemos uma altura mínima confortável mas não forçamos 100vh */
-    min-height: clamp(520px, 80svh, 720px);
+    /* padding-top grande: conteúdo começa abaixo do header flutuante */
+    padding: 100px var(--gutter) clamp(20px, 6vw, 32px);
+    min-height: 100%;
     align-items: end;
   }
   .hero__caption {
