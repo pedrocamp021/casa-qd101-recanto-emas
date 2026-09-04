@@ -414,10 +414,9 @@ p { margin: 0; }
   border-bottom: 1px solid rgba(217, 188, 115, 0.2);
   overflow: hidden;
   isolation: isolate;
-  /* IMPORTANTE: nada de margin-top negativo aqui — em iOS/Android isso
-     faz o navegador pular o scroll inicial. O espaço do header sticky
-     já é compensado por padding-top:76px abaixo. */
-  padding-top: 76px;
+  /* Mobile-first: preenche 100% da tela visível. Desktop: descontamos o header. */
+  min-height: 100svh;
+  min-height: 100vh;
 }
 .hero__bg {
   position: absolute;
@@ -498,9 +497,9 @@ p { margin: 0; }
   align-items: center;
   position: relative;
   z-index: 2;
-  /* Altura = viewport inteiro (cabe tudo sem scroll) */
-  min-height: calc(100svh - 76px);
-  min-height: calc(100vh - 76px);
+  /* Preenche 100% da hero (que já tem min-height:100vh) */
+  min-height: 100%;
+  padding-top: 100px; /* compensa o header flutuante para não cobrir o conteúdo */
 }
 .hero__copy { max-width: 640px; }
 .hero__label {

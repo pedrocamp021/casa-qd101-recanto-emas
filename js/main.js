@@ -16,9 +16,26 @@
   }
   // Garante scroll em 0 antes da página pintar
   window.scrollTo(0, 0);
-  // Backup: se ainda assim rolou, força de novo no load
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+  // Backup: força de novo no load e depois
+  window.addEventListener('DOMContentLoaded', function () {
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  });
   window.addEventListener('load', function () {
-    setTimeout(function () { window.scrollTo(0, 0); }, 0);
+    setTimeout(function () {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }, 0);
+    // Mais um backup 100ms depois (iOS às vezes restaura scroll depois do load)
+    setTimeout(function () {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }, 100);
   });
 
   // ======================================================
