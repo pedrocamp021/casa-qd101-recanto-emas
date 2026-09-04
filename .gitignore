@@ -1,0 +1,32 @@
+# Windows
+Thumbs.db
+desktop.ini
+*.lnk
+
+# macOS
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Imagens grandes para preview (não precisa subir pro repo)
+preview/
+
+# Node (não usamos, mas caso alguém rode)
+node_modules/
+
+# Variáveis de ambiente
+.env
+.env.local
