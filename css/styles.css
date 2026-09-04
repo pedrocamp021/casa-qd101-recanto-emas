@@ -414,7 +414,9 @@ p { margin: 0; }
   border-bottom: 1px solid rgba(217, 188, 115, 0.2);
   overflow: hidden;
   isolation: isolate;
-  /* Mobile-first: preenche 100% da tela visível. Desktop: descontamos o header. */
+  /* 100vh TOTAL - sem padding, sem margin.
+     O background (hero__bg) cobre tudo, inclusive atrás do header.
+     O conteúdo (hero__inner) tem padding-top pra começar abaixo do header. */
   min-height: 100svh;
   min-height: 100vh;
 }
@@ -497,9 +499,10 @@ p { margin: 0; }
   align-items: center;
   position: relative;
   z-index: 2;
-  /* Preenche 100% da hero (que já tem min-height:100vh) */
-  min-height: 100%;
-  padding-top: 100px; /* compensa o header flutuante para não cobrir o conteúdo */
+  /* Sem min-height: 100% - isso somava padding + 100vh = overflow.
+     O conteúdo apenas flui naturalmente dentro da hero de 100vh.
+     padding-top aqui serve para o texto não ficar atrás do header. */
+  padding-top: 90px;
 }
 .hero__copy { max-width: 640px; }
 .hero__label {
@@ -704,8 +707,7 @@ p { margin: 0; }
 /* Mobile: foto centralizada, gradiente mais forte pra ler o texto */
 @media (max-width: 900px) {
   .hero {
-    /* Sem margin-top negativo no mobile — causava salto de scroll no carregamento */
-    padding-top: 76px;
+    /* Sem padding-top no mobile - o hero__inner já tem padding-top */
   }
   .hero__bg {
     background-position: 65% center; /* ajuste fino do crop mobile */
