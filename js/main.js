@@ -7,6 +7,21 @@
   'use strict';
 
   // ======================================================
+  // SCROLL FIX MOBILE — força a página SEMPRE começar no topo
+  // (iOS Safari e Chrome Android às vezes restauram scroll de sessões
+  //  anteriores, especialmente com hero que tem margin-top negativo)
+  // ======================================================
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+  // Garante scroll em 0 antes da página pintar
+  window.scrollTo(0, 0);
+  // Backup: se ainda assim rolou, força de novo no load
+  window.addEventListener('load', function () {
+    setTimeout(function () { window.scrollTo(0, 0); }, 0);
+  });
+
+  // ======================================================
   // HERO CAPTION SYNC — muda o caption junto com o slide ativo
   // ======================================================
   const heroCaptionLabel = document.getElementById('heroCaptionLabel');
