@@ -499,8 +499,8 @@ p { margin: 0; }
   position: relative;
   z-index: 2;
   /* Altura = viewport inteiro (cabe tudo sem scroll) */
-  min-height: 100svh;
-  min-height: 100vh;
+  min-height: calc(100svh - 76px);
+  min-height: calc(100vh - 76px);
 }
 .hero__copy { max-width: 640px; }
 .hero__label {
