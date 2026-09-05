@@ -37,6 +37,14 @@
       document.body.scrollTop = 0;
     }, 100);
   });
+  // pageshow: dispara quando o iOS restaura a página do bfcache (volta de outra aba/app)
+  window.addEventListener('pageshow', function (e) {
+    if (e.persisted) {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }
+  });
 
   // ======================================================
   // HERO CAPTION SYNC — muda o caption junto com o slide ativo
