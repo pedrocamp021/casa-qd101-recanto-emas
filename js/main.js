@@ -52,11 +52,10 @@
   const heroCaptionLabel = document.getElementById('heroCaptionLabel');
   const heroCaptionSub = document.getElementById('heroCaptionSub');
   const heroCaptions = [
-    { label: 'Sala integrada', sub: 'Estar + Jantar + Cozinha americana' },
-    { label: 'Cozinha americana', sub: 'Iluminação natural + móveis planejados' },
-    { label: 'Sala de jantar', sub: 'Mesa redonda · espaço para receber' },
-    { label: 'Área gourmet', sub: 'Churrasqueira + gramado + pergolado' },
-    { label: 'Suíte principal', sub: 'Cabeceira com ripado dourado' },
+    { label: 'Sala de estar', sub: 'Painel ripado + home + sofá' },
+    { label: 'Jantar integrado', sub: 'Mesa + espelho + sala ao fundo' },
+    { label: 'Área integrada', sub: 'Estar · jantar · cozinha americana' },
+    { label: 'Cozinha americana', sub: 'Planejada + iluminação natural' },
   ];
   if (heroCaptionLabel && heroCaptionSub && heroCaptions.length) {
     let heroIdx = 0;

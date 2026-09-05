@@ -440,33 +440,28 @@ p { margin: 0; }
   will-change: opacity, transform;
 }
 /* Cada slide recebe um delay diferente pra criar o efeito cross-fade contínuo.
-   5 fotos × 6s = 30s de ciclo.
-   Ken Burns: zoom de 1.0 → 1.10 em cada foto.
+   4 fotos × 6s = 24s de ciclo.
+   Ken Burns: zoom de 1.0 → 1.18 em cada foto.
    Cross-fade acontece nos ~10% finais de cada ciclo. */
 .hero__slide:nth-child(1) {
   background-image: url('../img/hero-01.jpg');
-  animation: heroFade 30s ease-in-out infinite;
+  animation: heroFade 24s ease-in-out infinite;
   animation-delay: 0s;
 }
 .hero__slide:nth-child(2) {
   background-image: url('../img/hero-02.jpg');
-  animation: heroFade 30s ease-in-out infinite;
+  animation: heroFade 24s ease-in-out infinite;
   animation-delay: 6s;
 }
 .hero__slide:nth-child(3) {
   background-image: url('../img/hero-03.jpg');
-  animation: heroFade 30s ease-in-out infinite;
+  animation: heroFade 24s ease-in-out infinite;
   animation-delay: 12s;
 }
 .hero__slide:nth-child(4) {
   background-image: url('../img/hero-04.jpg');
-  animation: heroFade 30s ease-in-out infinite;
+  animation: heroFade 24s ease-in-out infinite;
   animation-delay: 18s;
-}
-.hero__slide:nth-child(5) {
-  background-image: url('../img/hero-05.jpg');
-  animation: heroFade 30s ease-in-out infinite;
-  animation-delay: 24s;
 }
 /* Keyframes do cross-fade + Ken Burns.
    Permanente: zoom de 1.0 → 1.18 em 6s (Ken Burns perceptível).
@@ -718,11 +713,19 @@ p { margin: 0; }
     background-position: 65% center; /* ajuste fino do crop mobile */
   }
   .hero__bg::after {
-    background: linear-gradient(180deg,
-      rgba(11, 31, 51, 0.5) 0%,
-      rgba(11, 31, 51, 0.75) 50%,
-      rgba(11, 31, 51, 0.9) 100%
-    );
+    /* Overlay CLARO: escuro só onde tem texto (esquerda) e um leve
+       reforço no topo/fundo. O meio-direito mostra a foto com cor real. */
+    background:
+      linear-gradient(100deg,
+        rgba(11, 31, 51, 0.55) 0%,
+        rgba(11, 31, 51, 0.28) 45%,
+        rgba(11, 31, 51, 0.08) 75%,
+        rgba(11, 31, 51, 0) 100%),
+      linear-gradient(180deg,
+        rgba(11, 31, 51, 0.35) 0%,
+        rgba(11, 31, 51, 0) 28%,
+        rgba(11, 31, 51, 0) 72%,
+        rgba(11, 31, 51, 0.28) 100%);
   }
   .hero__inner {
     /* padding-top generoso: conteúdo desce e respira longe do header flutuante */
@@ -734,12 +737,34 @@ p { margin: 0; }
   .hero__title {
     font-size: clamp(34px, 9.5vw, 46px);
     line-height: 1.08;
+    /* Sombra suave: mantém leitura mesmo com overlay claro */
+    text-shadow: 0 2px 18px rgba(11, 31, 51, 0.55), 0 1px 3px rgba(0, 0, 0, 0.45);
+  }
+  /* SCRIM: halo escuro suave só atrás do bloco de texto.
+     A foto continua clara ao redor; o destaque fica no conteúdo. */
+  .hero__copy {
+    position: relative;
+  }
+  .hero__copy::before {
+    content: '';
+    position: absolute;
+    inset: -34px -40px;
+    background: radial-gradient(110% 85% at 38% 45%,
+      rgba(11, 31, 51, 0.62) 0%,
+      rgba(11, 31, 51, 0.4) 48%,
+      rgba(11, 31, 51, 0.12) 72%,
+      transparent 100%);
+    filter: blur(26px);
+    z-index: -1;
+    border-radius: 56px;
   }
   /* Subtítulo um pouco maior e com mais espaço */
   .hero__sub {
     font-size: 15px;
     line-height: 1.65;
     margin-bottom: 18px;
+    color: rgba(244, 239, 227, 0.95);
+    text-shadow: 0 1px 12px rgba(11, 31, 51, 0.6);
   }
   .hero__caption {
     bottom: 12px;
