@@ -946,7 +946,8 @@ p { margin: 0; }
 .gallery__grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 240px 240px 240px;
+  grid-auto-rows: 230px;
+  grid-auto-flow: dense;
   gap: 12px;
   max-width: var(--container);
   margin: 0 auto;
@@ -960,13 +961,8 @@ p { margin: 0; }
   transition: opacity 0.4s var(--ease);
 }
 .gallery__item:hover { opacity: 0.92; }
-.gallery__item--1 { grid-column: span 2; grid-row: span 2; }
-.gallery__item--2 { grid-column: span 1; grid-row: span 1; }
-.gallery__item--3 { grid-column: span 1; grid-row: span 1; }
-.gallery__item--4 { grid-column: span 1; grid-row: span 1; }
-.gallery__item--5 { grid-column: span 2; grid-row: span 1; }
-.gallery__item--6 { grid-column: span 1; grid-row: span 1; }
-.gallery__item--7 { grid-column: span 4; grid-row: span 1; height: 280px; }
+/* Fotos destaque ocupam célula dupla — cria ritmo editorial no mosaico */
+.gallery__item--feature { grid-column: span 2; grid-row: span 2; }
 
 .gallery__placeholder {
   position: absolute;
@@ -1022,9 +1018,7 @@ p { margin: 0; }
     aspect-ratio: 4 / 5;
     scroll-snap-align: center;
   }
-  .gallery__item--1, .gallery__item--2, .gallery__item--3,
-  .gallery__item--4, .gallery__item--5, .gallery__item--6,
-  .gallery__item--7 { grid-column: auto; grid-row: auto; height: auto; }
+  .gallery__item--feature { grid-column: auto; grid-row: auto; height: auto; }
 }
 
 /* ============== LIGHTBOX ============== */
