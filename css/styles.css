@@ -52,8 +52,12 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
-  /* CRÍTICO mobile: nunca deixa a página "vazar" pra fora do viewport */
+  /* CRÍTICO mobile: nunca deixa a página "vazar" pra fora do viewport.
+     overflow-x: clip (não hidden!) — hidden no html quebra position:fixed
+     nos navegadores mobile (header some no load). clip bloqueia o overflow
+     sem virar scroll container. hidden fica como fallback p/ browsers velhos. */
   overflow-x: hidden;
+  overflow-x: clip;
   max-width: 100vw;
 }
 body {
@@ -66,8 +70,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-feature-settings: 'ss01' on, 'cv11' on;
-  /* Reforço contra overflow horizontal */
+  /* Reforço contra overflow horizontal — clip vence, hidden é fallback.
+     (hidden no body também pode atrapalhar o repaint do header fixed no iOS) */
   overflow-x: hidden;
+  overflow-x: clip;
   max-width: 100vw;
   position: relative;
 }
@@ -440,37 +446,37 @@ p { margin: 0; }
   will-change: opacity, transform;
 }
 /* Cada slide recebe um delay diferente pra criar o efeito cross-fade contínuo.
-   4 fotos × 6s = 24s de ciclo.
-   Ken Burns: zoom de 1.0 → 1.18 em cada foto.
-   Cross-fade acontece nos ~10% finais de cada ciclo. */
+   4 fotos × 4s = 16s de ciclo (transição mais ágil).
+   Ken Burns: zoom de 1.0 → 1.32 em cada foto (mais intenso).
+   Cross-fade acontece nos ~12% finais de cada ciclo. */
 .hero__slide:nth-child(1) {
   background-image: url('../img/hero-01.jpg');
-  animation: heroFade 24s ease-in-out infinite;
+  animation: heroFade 16s ease-in-out infinite;
   animation-delay: 0s;
 }
 .hero__slide:nth-child(2) {
   background-image: url('../img/hero-02.jpg');
-  animation: heroFade 24s ease-in-out infinite;
-  animation-delay: 6s;
+  animation: heroFade 16s ease-in-out infinite;
+  animation-delay: 4s;
 }
 .hero__slide:nth-child(3) {
   background-image: url('../img/hero-03.jpg');
-  animation: heroFade 24s ease-in-out infinite;
-  animation-delay: 12s;
+  animation: heroFade 16s ease-in-out infinite;
+  animation-delay: 8s;
 }
 .hero__slide:nth-child(4) {
   background-image: url('../img/hero-04.jpg');
-  animation: heroFade 24s ease-in-out infinite;
-  animation-delay: 18s;
+  animation: heroFade 16s ease-in-out infinite;
+  animation-delay: 12s;
 }
 /* Keyframes do cross-fade + Ken Burns.
-   Permanente: zoom de 1.0 → 1.18 em 6s (Ken Burns perceptível).
+   Permanente: zoom de 1.0 → 1.32 em 4s (Ken Burns intenso).
    Fade: opacity 0 → 1 no início, 1 → 0 no final. */
 @keyframes heroFade {
   0%   { opacity: 0; transform: scale(1.0); }
-  6%   { opacity: 1; transform: scale(1.02); }
-  94%  { opacity: 1; transform: scale(1.18); }
-  100% { opacity: 0; transform: scale(1.18); }
+  10%  { opacity: 1; transform: scale(1.03); }
+  88%  { opacity: 1; transform: scale(1.32); }
+  100% { opacity: 0; transform: scale(1.32); }
 }
 
 .hero__bg::after {

@@ -70,7 +70,7 @@
         heroCaptionLabel.style.opacity = '1';
         heroCaptionSub.style.opacity = '1';
       }, 250);
-    }, 6000);
+    }, 4000); // sincronizado com o ciclo de 4s por foto do CSS
     // transições suaves no caption
     heroCaptionLabel.style.transition = 'opacity .25s ease';
     heroCaptionSub.style.transition = 'opacity .25s ease';
