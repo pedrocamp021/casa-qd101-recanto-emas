@@ -83,11 +83,11 @@
   const CONFIG = {
     // Número do WhatsApp da Sara (DDD + número, sem espaços, sem +, sem parênteses)
     // Exemplo de Brasília: 5561988887777
-    whatsappNumber: '55619XXXXXXXX',
+    whatsappNumber: '5561981582129',
 
     // Mensagem base que aparece pré-preenchida no WhatsApp
     baseMessage:
-      'Olá Sara, vi o anúncio da casa da QD 101 no Recanto das Emas. Pode me passar mais informações?',
+      'Olá Sara! Tudo bem? Vi o site e gostaria de saber mais sobre a casa do Recanto das Emas DF.',
   };
 
   // ======================================================
