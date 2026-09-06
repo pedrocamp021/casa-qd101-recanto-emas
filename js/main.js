@@ -87,7 +87,7 @@
 
     // Mensagem base que aparece pré-preenchida no WhatsApp
     baseMessage:
-      'Olá Sara! Tudo bem? Vi o site e gostaria de saber mais sobre a casa do Recanto das Emas DF.',
+      'Olá Sara! Tudo bem? Vim do site e gostaria de saber mais sobre a casa do Recanto das Emas DF.',
   };
 
   // ======================================================
@@ -100,17 +100,9 @@
     const campaign = params.get('utm_campaign') || '';
 
     let message = CONFIG.baseMessage;
-    const utmParts = [];
-    if (source !== 'direto') utmParts.push(source);
-    if (medium) utmParts.push(medium);
-    if (campaign) utmParts.push(`campanha: ${campaign}`);
-
-    if (utmParts.length) {
-      message += `\n\nOrigem: ${utmParts.join(' / ')}`;
-    }
-    if (ctaSource) {
-      message += `\n[CTA: ${ctaSource}]`;
-    }
+    // Rastreio de origem fica FORA da mensagem visível (só via UTMs na URL).
+    // A Sara recebe o texto limpo; o analytics fica por conta dos parâmetros.
+    void ctaSource; // mantido na assinatura por compatibilidade, mas não vai mais pro texto
 
     return `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
   }
