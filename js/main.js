@@ -168,6 +168,60 @@
   }
 
   // ======================================================
+  // REVEAL EM CASCATA — irmãos .reveal dentro do mesmo
+  // container entram com 70ms de diferença (coreografia)
+  // ======================================================
+  document.querySelectorAll('.features, .stats__grid, .price__docs, .location__list').forEach((group) => {
+    Array.from(group.querySelectorAll('.reveal')).forEach((el, i) => {
+      el.style.transitionDelay = Math.min(i * 70, 420) + 'ms';
+    });
+  });
+
+  // ======================================================
+  // HEADER VIVO — estado is-scrolled após 40px de rolagem
+  // ======================================================
+  const header = document.querySelector('.header');
+  if (header) {
+    const onHeaderScroll = () => {
+      header.classList.toggle('is-scrolled', window.scrollY > 40);
+    };
+    window.addEventListener('scroll', onHeaderScroll, { passive: true });
+    onHeaderScroll();
+  }
+
+  // ======================================================
+  // CONTADOR DOS STATS — sobe de 0 até o valor quando entra na tela
+  // ======================================================
+  const counters = Array.from(document.querySelectorAll('.stat__num em'));
+  if (counters.length && 'IntersectionObserver' in window) {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const animate = (el) => {
+      const target = parseInt(el.textContent, 10);
+      if (!target || reduceMotion) return;
+      const dur = 900;
+      const t0 = performance.now();
+      el.textContent = '0';
+      const tick = (now) => {
+        const p = Math.min((now - t0) / dur, 1);
+        // ease-out cubic: começa rápido, desacelera no fim
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = String(Math.round(target * eased));
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    };
+    const cObs = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          animate(entry.target);
+          cObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.6 });
+    counters.forEach((el) => cObs.observe(el));
+  }
+
+  // ======================================================
   // WHATSAPP FLOAT — só aparece após scroll
   // ======================================================
   const waFloat = document.querySelector('.wa-float');
