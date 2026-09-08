@@ -118,9 +118,9 @@
     link.rel = 'noopener noreferrer';
 
     link.addEventListener('click', () => {
-      // Fire Meta Pixel Lead event
+      // Fire Meta Pixel Contact event (clique no botão WhatsApp = contato/lead)
       if (typeof window.fbq === 'function') {
-        window.fbq('track', 'Lead', {
+        window.fbq('track', 'Contact', {
           content_name: document.title,
           cta_source: source,
         });

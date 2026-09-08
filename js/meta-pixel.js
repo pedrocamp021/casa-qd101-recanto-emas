@@ -1,10 +1,11 @@
 /* =========================================================
-   META PIXEL · Boilerplate
-   SUBSTITUIR 'SEU_PIXEL_ID_AQUI' pelo ID real quando tiver
+   META PIXEL · Sara Araújo Imóveis
+   Pixel ID: 1100363919008543
+   Conta: act_743612168715026
    ========================================================= */
 
 (function () {
-  var PIXEL_ID = 'SEU_PIXEL_ID_AQUI';
+  var PIXEL_ID = '1100363919008543';
 
   if (PIXEL_ID === 'SEU_PIXEL_ID_AQUI') {
     console.info('[Meta Pixel] ID ainda nao configurado. Substitua em js/meta-pixel.js');
